@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обо мне | About Me</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js'></script>
+    <script>
+        window.addEventListener('load', () => {
+            if (typeof marked === 'undefined') {
+                console.error('marked library failed to load');
+            }
+        });
+    </script>
+</head>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+
+    <div class="container">
+        <nav class="top-bar">
+            <a href="../index.html" class="back-button">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                <span class="back-text">Главная</span>
+            </a>
+            <div class="language-switch">
+                <button class="lang-btn active" data-lang="ru">RU</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+        </nav>
+
+        <main class="content">
+            <div class="glass-container">
+                <div class="about-content">
+                    <h1 id="about-title">Обо мне</h1>
+                    <div id="about-text" class="about-text">
+                        <!-- Контент будет загружен через JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../wallpaper/script.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
