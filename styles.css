@@ -1,11 +1,36 @@
 :root {
-    --bg-color: #000000;
-    --glass-bg: rgba(28, 28, 28, 0.7);
-    --card-bg: rgba(44, 44, 44, 0.5);
-    --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.7);
-    --accent: #0A84FF;
-    --hover-bg: rgba(255, 255, 255, 0.1);
+    /* Тёмная тема */
+    --bg-color-dark: #000000;
+    --glass-bg-dark: rgba(0, 0, 0, 0.644);
+    --text-primary-dark: #ffffff;
+    --text-secondary-dark: rgba(255, 255, 255, 0.7);
+    --card-bg-dark: rgba(255, 255, 255, 0.027);
+    --card-border-dark: rgba(255, 255, 255, 0.068);
+    --card-hover-dark: rgba(255, 255, 255, 0.041);
+
+    /* Светлая тема */
+    --bg-color-light: #ffffff;
+    --glass-bg-light: rgba(255, 255, 255, 0.884);
+    --text-primary-light: #000000;
+    --text-secondary-light: rgba(0, 0, 0, 0.7);
+    --card-bg-light: rgba(0, 0, 0, 0.027);
+    --card-border-light: rgba(0, 0, 0, 0.068);
+    --card-hover-light: rgba(0, 0, 0, 0.041);
+
+    /* Общие */
+    --accent: #0affa1;
+}
+
+/* Применяем цвета в зависимости от темы */
+body {
+    color: var(--text-primary-dark);
+    background-color: var(--bg-color-dark);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-theme {
+    color: var(--text-primary-light);
+    background-color: var(--bg-color-light);
 }
 
 * {
@@ -22,6 +47,27 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Базовые цвета для темной темы */
+body {
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --card-bg: var(--card-bg-dark);
+    --card-border: var(--card-border-dark);
+    color: var(--text-primary-dark);
+    background-color: var(--bg-color-dark);
+    transition: all 0.3s ease;
+}
+
+/* Цвета для светлой темы */
+body.light-theme {
+    --text-primary: var(--text-primary-light);
+    --text-secondary: var(--text-secondary-light);
+    --card-bg: var(--card-bg-light);
+    --card-border: var(--card-border-light);
+    color: var(--text-primary-light);
+    background-color: var(--bg-color-light);
 }
 
 .container {
@@ -43,15 +89,19 @@ body {
 }
 
 .glass-container {
-    background: rgba(28, 28, 28, 0.3);
-    backdrop-filter: blur(40px) saturate(200%);
-    -webkit-backdrop-filter: blur(40px) saturate(200%);
+    background: rgba(0, 0, 0, 0.548);
+    backdrop-filter: blur(60px) saturate(200%);
+    -webkit-backdrop-filter: blur(60px) saturate(200%);
     border-radius: 24px;
     padding: 2rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    position: relative;
-    z-index: 1;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.light-theme .glass-container {
+    background: rgba(255, 255, 255, 0.863);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .content {
@@ -99,51 +149,39 @@ h1 {
 }
 
 .bento-item {
-    background: rgba(44, 44, 44, 0.3);
+    background: var(--card-bg-dark);
+    border: 1px solid var(--card-border-dark);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
+    border-radius: 14px;
     padding: 1.8rem;
     text-decoration: none;
-    color: var(--text-primary);
-    transition: all 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+    color: var(--text-primary-dark);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.8rem;
     text-align: center;
-    will-change: transform;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    animation: fadeUp 0.5s ease backwards;
+    position: relative;
+    justify-content: center;
+    min-height: 180px;
+}
+
+.bento-item .description {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-top: auto;
+}
+
+.light-theme .bento-item {
+    background: var(--card-bg-light);
+    border: 1px solid var(--card-border-light);
+    color: var(--text-primary-light);
 }
 
 .bento-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transform: translateY(-5px) scale(1.02);
-}
-
-.bento-item h3 {
-    margin: 0.5rem 0;
-    font-size: 1.2rem;
-}
-
-.bento-item p {
-    margin: 0;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
-.icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.github-icon {
-    width: 2rem;
-    height: 2rem;
+    transform: translateY(-6px);
 }
 
 @media (max-width: 768px) {
@@ -177,6 +215,16 @@ h1 {
         opacity: 1;
         transform: scale(1);
     }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(0deg); }
+}
+
+/* Удаляем старую анимацию rgb-border */
+@keyframes rgb-border {
+    0%, 100% { border-color: transparent; }
 }
 
 /* Модальное окно */
@@ -318,4 +366,61 @@ h1 {
     .contact-item {
         padding: 14px 16px;
     }
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    font-size: 1.5rem; /* Увеличиваем размер иконки переключателя темы */
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.light-theme .theme-toggle {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.light-theme {
+    --text-primary: #000000;
+    --text-secondary: rgba(0, 0, 0, 0.7);
+    --bg-color: #ffffff;
+}
+
+.icon {
+    font-size: 2.5rem; /* Увеличиваем размер эмодзи */
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.github-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: currentColor; /* Убеждаемся, что иконка наследует цвет текста */
+}
+
+.profile-section h1,
+.subtitle {
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.subtitle {
+    color: var(--text-secondary);
 }

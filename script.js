@@ -10,73 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error fetching GitHub data:', error);
         });
 
-    // Анимация появления карточек
-    const cards = document.querySelectorAll('.card');
-    cards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-    });
-
     // Анимация появления элементов
     const bentoItems = document.querySelectorAll('.bento-item');
     bentoItems.forEach((item, index) => {
         item.style.animationDelay = `${index * 0.1}s`;
-    });
-
-    let mouseX = 0;
-    let mouseY = 0;
-    let rafId = null;
-
-    const lerp = (start, end, factor) => {
-        return start + (end - start) * factor;
-    };
-
-    const animateCards = () => {
-        const items = document.querySelectorAll('.bento-item');
-        items.forEach(item => {
-            const rect = item.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-
-            const distanceX = mouseX - centerX;
-            const distanceY = mouseY - centerY;
-
-            const rotateX = distanceY * -0.01;
-            const rotateY = distanceX * 0.01;
-
-            item.style.transform = `
-                perspective(1000px)
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-                translateZ(10px)
-            `;
-        });
-        rafId = requestAnimationFrame(animateCards);
-    };
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-
-        if (!rafId) {
-            rafId = requestAnimationFrame(animateCards);
-        }
-    });
-
-    document.addEventListener('mouseleave', () => {
-        if (rafId) {
-            cancelAnimationFrame(rafId);
-            rafId = null;
-        }
-
-        const items = document.querySelectorAll('.bento-item');
-        items.forEach(item => {
-            item.style.transform = `
-                perspective(1000px)
-                rotateX(0deg)
-                rotateY(0deg)
-                translateZ(0)
-            `;
-        });
     });
 
     // Плавный скролл при клике на ссылки
@@ -91,6 +28,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Плавный переход между страницами
     document.querySelector('#about').addEventListener('click', function(e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        
+        // Анимация исчезновения текущей страницы
+        const container = document.querySelector('.glass-container');
+        container.style.transition = 'all 0.3s ease-out';
+        container.style.opacity = '0';
+        container.style.transform = 'scale(0.95)';
+        
+        // Добавляем transition для body, чтобы фон тоже плавно исчезал
+        document.body.style.transition = 'opacity 0.3s ease-out';
+        document.body.style.opacity = '0';
+        
+        setTimeout(() => {
+            // Сохраняем флаг в sessionStorage для анимации на следующей странице
+            sessionStorage.setItem('pageTransition', 'true');
+            window.location.href = href;
+        }, 300);
+    });
+
+    // Плавный переход между страницами для кнопки "Новости"
+    document.querySelector('#news').addEventListener('click', function(e) {
         e.preventDefault();
         const href = this.getAttribute('href');
         
@@ -235,4 +194,22 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
         }
     }, { passive: false });
+
+    // Переключение темы (заменяем существующий код)
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('.theme-icon');
+    
+    // Проверяем сохраненную тему при загрузке
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+    }
+
+    // Обработчик переключения темы
+    themeToggle.addEventListener('click', () => {
+        const isLight = document.body.classList.toggle('light-theme');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        themeIcon.textContent = isLight ? '☀️' : '🌙';
+    });
 });
