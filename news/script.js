@@ -11,6 +11,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const news = {
         ru: [
             {
+                id: 3,
+                author: {
+                    username: 'vberezinbadger',
+                    name: 'Vladimir Berezin',
+                    avatar: 'https://avatars.githubusercontent.com/u/72685561?v=4'
+                },
+                date: '2025-04-07',
+                content: `# Переход на [vberezin.megasiski.ru](https://vberezin.megasiski.ru) 🎉
+
+Сайт переехал на новый домен! Теперь он доступен по адресу [vberezin.megasiski.ru](https://vberezin.megasiski.ru). Это не значит, что сайт не работает по старому адресу (GitHub Pages), он всё ещё продолжает работать.
+
+## Что нового?
+
+Из нового хочу отметить:
+- Теперь сайт располагается на [vberezin.megasiski.ru](https://vberezin.megasiski.ru)
+
+## Комментарий
+Вообще, у ребят это целый бесплатный хостинг для статических сайтов. Так что, если вы хотите разместиться у них, этот хостинг для вас. Там же, вы сможете поддержать ребят, они этого заслужили: [открыть сайт хостинга megasiski](megasiski.ru).
+Вообще мне понравился домен, и хотелось разместиться на нём по приколу, а повезло и то, что это хостинг для всякого рода статики и мемных сайтиков.`
+            },
+            {
                 id: 2,
                 author: {
                     username: 'vberezinbadger',
@@ -73,6 +94,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         ],
         en: [
+            {
+                id: 3,
+                author: {
+                    username: 'vberezinbadger',
+                    name: 'Vladimir Berezin',
+                    avatar: 'https://avatars.githubusercontent.com/u/72685561?v=4'
+                },
+                date: '2025-04-07',
+                content: `# Moving to [vberezin.megasiski.ru](https://vberezin.megasiski.ru) 🎉
+
+The website has moved to a new domain! It's now available at [vberezin.megasiski.ru](https://vberezin.megasiski.ru). This doesn't mean the site doesn't work at the old address (GitHub Pages), it still continues to work.
+
+## What's New?
+
+Among the new things I want to highlight:
+- The site is now hosted at [vberezin.megasiski.ru](https://vberezin.megasiski.ru)
+
+## Comment
+Actually, these guys have a whole free hosting service for static websites. So if you want to host with them, this hosting is for you. There, you can also support the guys, they deserve it: [open megasiski hosting site](megasiski.ru).
+I really liked the domain and wanted to host there for fun, and it was lucky that it's a hosting service for all kinds of static and meme websites.`
+            },
             {
                 id: 2,
                 author: {
